@@ -1,0 +1,20 @@
+{
+    "name": "jandlouhy/game",
+    "description": "Game of Life",
+    "type": "project",
+    "require": {
+        "php": ">= 7.2",
+        "symfony/console": "^4.0"
+    },
+    "authors": [
+        {
+            "name": "jandlouhy",
+            "email": "jan@jandlouhy.cz"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Game\\": "src/"
+        }
+    }
+}
