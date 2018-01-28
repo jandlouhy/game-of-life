@@ -2,9 +2,6 @@
 
 namespace Game\Cell;
 
-
-use function var_dump;
-
 class Coordinates
 {
     const MAX_NEIGHBOUR_DISTANCE = 1;

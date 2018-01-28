@@ -22,12 +22,8 @@ class WorldStateFactory
         $cells = [];
         for ($x = 0; $x < $worldWidth; $x++) {
             for ($y = 0; $y < $worldHeight; $y++) {
-                $coordinates = new Coordinates($x, $y);
-
-                $cells[] = new Cell(
-                    $coordinates,
-                    isset($livingCellsArray[$coordinates->getX()][$coordinates->getY()])
-                );
+                $isCellAlive = isset($livingCellsArray[$x][$y]);
+                $cells[] = new Cell(new Coordinates($x, $y), $isCellAlive);
             }
         }
 
