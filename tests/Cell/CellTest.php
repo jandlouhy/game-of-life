@@ -2,7 +2,6 @@
 
 namespace Game\Tests\Cell;
 
-
 use Game\Cell\Cell;
 use Game\Cell\Coordinates;
 use PHPUnit\Framework\TestCase;
