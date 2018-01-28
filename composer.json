@@ -17,6 +17,11 @@
             "Game\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Game\\Tests\\": "tests/"
+        }
+    },
     "require-dev": {
         "phpstan/phpstan": "^0.9.2",
         "phpunit/phpunit": "^6"

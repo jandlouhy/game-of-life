@@ -6,7 +6,6 @@ use Game\Cell\Coordinates;
 use Game\Life\LifeResolver;
 use Generator;
 use IteratorAggregate;
-use function var_dump;
 
 class World implements IteratorAggregate
 {
