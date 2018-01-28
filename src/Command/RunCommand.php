@@ -16,6 +16,19 @@ class RunCommand extends Command
     const LIVING_CELL = 'X';
     const EMPTY_CELL = ' ';
 
+    /** @var WorldFactory */
+    private $worldFactory;
+
+    /**
+     * @param WorldFactory $worldFactory
+     */
+    public function __construct(WorldFactory $worldFactory)
+    {
+        $this->worldFactory = $worldFactory;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this->setName('game:run');
@@ -25,9 +38,13 @@ class RunCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $worldBuilder = new WorldFactory();
-        $dataProvider = new RandomDataProvider();
-        $world = $worldBuilder->create($dataProvider);
+        $data = new RandomDataProvider();
+
+        $world = $this->worldFactory->create(
+            $data->getWorldWidth(),
+            $data->getWorldHeight(),
+            $data->getCellCoordinates()
+        );
 
         foreach ($world as $worldState) {
             $output->write(sprintf("\033\143"));
