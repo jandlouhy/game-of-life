@@ -46,7 +46,7 @@ class World implements IteratorAggregate
     /**
      * @return WorldState|Generator
      */
-    public function getIterator(): Generator
+    public function getIterator()
     {
         $worldState = $this->worldState;
 

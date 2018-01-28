@@ -3,7 +3,6 @@
 namespace Game\World;
 
 use Game\Cell\Cell;
-use function var_dump;
 
 class WorldState
 {

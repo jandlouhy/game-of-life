@@ -21,7 +21,7 @@ class RandomDataProvider implements DataProviderInterface
     public function __construct()
     {
         $this->worldWidth = $this->worldHeight = mt_rand(self::MIN_WORLD_SIZE, self::MAX_WORLD_SIZE);
-        $this->cellCount = $this->getWorldWidth() * $this->getWorldHeight() / 3;
+        $this->cellCount = floor($this->getWorldWidth() * $this->getWorldHeight() / 3);
     }
 
     public function getWorldWidth(): int

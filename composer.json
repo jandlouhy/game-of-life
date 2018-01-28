@@ -16,5 +16,8 @@
         "psr-4": {
             "Game\\": "src/"
         }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.9.2"
     }
 }

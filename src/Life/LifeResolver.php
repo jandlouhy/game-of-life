@@ -19,7 +19,6 @@ class LifeResolver
         $this->lifeRules = $lifeRules;
     }
 
-
     /**
      * @return Cell[]
      */
@@ -33,13 +32,18 @@ class LifeResolver
         );
     }
 
+    /**
+     * @param Cell $cell
+     * @param WorldState $worldState
+     * @return bool
+     */
     private function isAlive(Cell $cell, WorldState $worldState): bool
     {
         $neighbourCells = $worldState->findLivingNeighbours($cell);
         $isAlive = false;
 
         foreach ($this->lifeRules as $lifeRule) {
-            $isAlive |= $lifeRule->isAlive($cell, $neighbourCells);
+            $isAlive = $isAlive || $lifeRule->isAlive($cell, $neighbourCells);
         }
 
         return $isAlive;
