@@ -1,4 +1,4 @@
-# Game of Life
+# Game of Life ![](https://travis-ci.org/jandlouhy/game-of-life.svg?branch=master)
 
 ## How to run me?
 Just clone the repo, install dependencies with `composer install` and run the game with `php index.php game:run`.
