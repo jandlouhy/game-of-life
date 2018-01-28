@@ -54,6 +54,6 @@ class World implements IteratorAggregate
 
             $nextStateCells = $this->lifeResolver->resolveLivingCells($worldState);
             $worldState = $this->worldStateFactory->create($nextStateCells);
-        } while (count($nextStateCells));
+        } while (count($nextStateCells) > 0);
     }
 }

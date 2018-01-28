@@ -2,32 +2,41 @@
 
 namespace Game\World;
 
-use Game\DataProvider\DataProviderInterface;
+use Game\Cell\Coordinates;
 use Game\Life\LifeResolver;
-use Game\Life\Rule\NewLifeRule;
-use Game\Life\Rule\StayAliveRule;
 
 class WorldFactory
 {
+    /** @var WorldStateFactory */
+    private $worldStateFactory;
+
+    /** @var LifeResolver */
+    private $lifeResolver;
+
     /**
-     * @param DataProviderInterface $dataProvider
+     * @param WorldStateFactory $worldStateFactory
+     * @param LifeResolver $lifeResolver
+     */
+    public function __construct(WorldStateFactory $worldStateFactory, LifeResolver $lifeResolver)
+    {
+        $this->worldStateFactory = $worldStateFactory;
+        $this->lifeResolver = $lifeResolver;
+    }
+
+    /**
+     * @param int $worldWidth
+     * @param int $worldHeight
+     * @param Coordinates[] $livingCellCoordinates
      * @return World
      */
-    public function create(DataProviderInterface $dataProvider)
+    public function create(int $worldWidth, int $worldHeight, array $livingCellCoordinates): World
     {
-        $worldStateFactory = new WorldStateFactory();
-
-        $lifeResolver = new LifeResolver([
-            new StayAliveRule(),
-            new NewLifeRule(),
-        ]);
-
         return new World(
-            $worldStateFactory,
-            $lifeResolver,
-            $dataProvider->getWorldWidth(),
-            $dataProvider->getWorldHeight(),
-            $dataProvider->getCellCoordinates()
+            $this->worldStateFactory,
+            $this->lifeResolver,
+            $worldWidth,
+            $worldHeight,
+            $livingCellCoordinates
         );
     }
 }

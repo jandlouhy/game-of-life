@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Game\:
+    resource: '../src/*'
+
+  Game\Command\:
+    resource: '../src/Command/*'
+    public: true
+
+  Game\Life\LifeResolver:
+    factory: 'Game\Life\LifeResolverFactory:create'
