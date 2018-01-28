@@ -6,7 +6,7 @@ use Game\Cell\Cell;
 use Game\Cell\Coordinates;
 use PHPUnit\Framework\TestCase;
 
-class CellTest extends TestCase
+final class CellTest extends TestCase
 {
     /**
      * @dataProvider coordinatesProvider

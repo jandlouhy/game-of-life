@@ -40,12 +40,13 @@ class LifeResolver
     private function isAlive(Cell $cell, WorldState $worldState): bool
     {
         $neighbourCells = $worldState->findLivingNeighbours($cell);
-        $isAlive = false;
 
-        foreach ($this->lifeRules as $lifeRule) {
-            $isAlive = $isAlive || $lifeRule->isAlive($cell, $neighbourCells);
-        }
-
-        return $isAlive;
+        return array_reduce(
+            $this->lifeRules,
+            function ($isAlive, LifeRuleInterface $lifeRule) use ($cell, $neighbourCells) {
+                return $isAlive || $lifeRule->isAlive($cell, $neighbourCells);
+            },
+            false
+        );
     }
 }
