@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace Game\Command;
 
-use Game\Cell\Cell;
+use Game\Command\Helper\WorldFormatter;
 use Game\DataProvider\RandomDataProvider;
 use Game\World\WorldFactory;
-use Game\World\WorldState;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -14,18 +13,22 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class RunCommand extends Command
 {
-    const LIVING_CELL = 'X';
-    const EMPTY_CELL = ' ';
+    const CYCLES_PER_SECOND = 3;
 
     /** @var WorldFactory */
     private $worldFactory;
 
+    /** @var WorldFormatter */
+    private $worldFormatter;
+
     /**
      * @param WorldFactory $worldFactory
+     * @param WorldFormatter $worldFormatter
      */
-    public function __construct(WorldFactory $worldFactory)
+    public function __construct(WorldFactory $worldFactory, WorldFormatter $worldFormatter)
     {
         $this->worldFactory = $worldFactory;
+        $this->worldFormatter = $worldFormatter;
 
         parent::__construct();
     }
@@ -48,35 +51,22 @@ class RunCommand extends Command
         );
 
         foreach ($world as $worldState) {
-            $output->write(sprintf("\033\143"));
-
-            $io->table([], $this->getWorldStateAsArray($worldState));
-
-            usleep(400000);
+            $this->clearOutput($output);
+            $io->table([], $this->worldFormatter->getWorldStateAsArray($worldState));
+            $this->sleep();
         }
     }
 
     /**
-     * @param WorldState $worldState
-     * @return array
+     * @param OutputInterface $output
      */
-    private function getWorldStateAsArray(WorldState $worldState): array
+    private function clearOutput(OutputInterface $output)
     {
-        $cellArray = [];
-        foreach ($worldState->getCells() as $cell) {
-            $cellCoordinates = $cell->getCoordinates();
-            $cellArray[$cellCoordinates->getX()][$cellCoordinates->getY()] = $this->getCellTablePresentation($cell);
-        }
-
-        return $cellArray;
+        $output->write(sprintf("\033\143"));
     }
 
-    /**
-     * @param Cell $cell
-     * @return string
-     */
-    private function getCellTablePresentation(Cell $cell): string
+    private function sleep()
     {
-        return $cell->isAlive() ? self::LIVING_CELL : self::EMPTY_CELL;
+        usleep((int)floor(1000000 / self::CYCLES_PER_SECOND));
     }
 }

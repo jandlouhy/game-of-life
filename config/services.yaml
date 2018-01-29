@@ -9,6 +9,7 @@ services:
 
   Game\Command\:
     resource: '../src/Command/*'
+    exclude: '../src/Command/Helper/*'
     public: true
 
   Game\Life\LifeResolver:
