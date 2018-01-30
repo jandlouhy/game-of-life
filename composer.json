@@ -2,19 +2,16 @@
     "name": "jandlouhy/game",
     "description": "Game of Life",
     "type": "project",
-    "require": {
-        "php": ">= 7.2",
-        "symfony/console": "^4.0",
-        "symfony/dependency-injection": "^4.0",
-        "symfony/yaml": "^4.0",
-        "symfony/config": "^4.0"
-    },
     "authors": [
         {
             "name": "jandlouhy",
             "email": "jan@jandlouhy.cz"
         }
     ],
+    "license": "MIT",
+    "config": {
+        "sort-packages": true
+    },
     "autoload": {
         "psr-4": {
             "Game\\": "src/"
@@ -24,6 +21,13 @@
         "psr-4": {
             "Game\\Tests\\": "tests/"
         }
+    },
+    "require": {
+        "php": "7.2.*",
+        "symfony/config": "^4.0",
+        "symfony/console": "^4.0",
+        "symfony/dependency-injection": "^4.0",
+        "symfony/yaml": "^4.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.9.2",
