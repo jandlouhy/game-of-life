@@ -4,7 +4,8 @@ php:
   - 7.2
 
 script:
-  - composer install
+  - composer validate --no-check-all --strict
+  - composer install -o
   - ./vendor/bin/phpcs --standard=PSR2 src tests
   - ./vendor/bin/phpstan analyse src tests --level max
   - ./vendor/bin/phpunit --bootstrap vendor/autoload.php tests
