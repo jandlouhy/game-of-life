@@ -16,15 +16,20 @@ class LifeResolverTest extends TestCase
 
     /**
      * @dataProvider cellPatternsProvider
+     *
+     * @param array $initialCellGrid
+     * @param array[] ...$expectedNextCellGrids
      */
-    public function testShouldGetCellsWithCorrectLifeStatus()
+    public function testShouldGetCellsWithCorrectLifeStatus(array $initialCellGrid, array ...$expectedNextCellGrids)
     {
-        $cellGrids = func_get_args();
-        $currentCellGrid = $this->createCellsFromGrid(array_shift($cellGrids));
+        $currentCellGrid = $this->createCellsFromGrid($initialCellGrid);
 
-        $lifeResolver = new LifeResolver([new NewLifeRule(), new StayAliveRule()]);
+        $lifeResolver = new LifeResolver([
+            new NewLifeRule(),
+            new StayAliveRule(),
+        ]);
 
-        foreach ($cellGrids as $expectedCellGrid) {
+        foreach ($expectedNextCellGrids as $expectedCellGrid) {
             $worldState = new WorldState($currentCellGrid);
             $currentCellGrid = $lifeResolver->resolveLivingCells($worldState);
 
