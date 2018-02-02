@@ -10,7 +10,20 @@
     ],
     "license": "MIT",
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "classmap-authoritative": true
+    },
+    "scripts": {
+        "run": "php index.php game:run",
+        "phpcs": "./vendor/bin/phpcs --standard=PSR2 src tests",
+        "phpstan": "./vendor/bin/phpstan analyse src tests --level max",
+        "tests": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests",
+        "check": [
+            "composer validate --no-check-all --strict",
+            "@phpcs",
+            "@phpstan",
+            "@tests"
+        ]
     },
     "autoload": {
         "psr-4": {
