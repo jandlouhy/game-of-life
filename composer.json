@@ -15,6 +15,7 @@
     },
     "scripts": {
         "run": "php index.php game:run",
+        "docker": "docker run --rm -v $(pwd):/app -w /app php:7.2-cli php index.php game:run",
         "phpcs": "./vendor/bin/phpcs --standard=PSR2 src tests",
         "phpstan": "./vendor/bin/phpstan analyse src tests --level max",
         "tests": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests",
